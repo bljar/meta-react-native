@@ -2,11 +2,10 @@ import { View, Text } from "react-native";
 
 export default function LittleLemonFooter() {
   return (
-    <View>
+    <View style={{ backgroundColor: "#F4CE14", marginBottom: 10 }}>
       <Text
         style={{
-          padding: 40,
-          fontSize: 30,
+          fontSize: 18,
           color: "Black",
           textAlign: "center",
         }}
