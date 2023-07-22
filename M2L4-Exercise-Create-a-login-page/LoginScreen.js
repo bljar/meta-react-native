@@ -10,12 +10,14 @@ export default function LoginScreen() {
       <Text style={styles.headerText}>Welcome to Little Lemon</Text>
       <Text style={styles.regularText}>Login to continue </Text>
       <TextInput
+        style={styles.input}
         value={email}
         onChangeText={onChangeEmail}
         placeholder="email"
         keyboardType="email-address"
       />
       <TextInput
+        style={styles.input}
         value={password}
         onChangeText={onChangePassword}
         secureTextEntry={true}
@@ -41,5 +43,14 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     color: "#EDEFEE",
     textAlign: "center",
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    fontSize: 16,
+    borderColor: "#EDEFEE",
+    backgroundColor: "#EDEFEE",
   },
 });
