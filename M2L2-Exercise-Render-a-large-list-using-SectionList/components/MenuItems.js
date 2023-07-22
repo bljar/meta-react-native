@@ -46,7 +46,11 @@ const menuItemsToDisplay = [
 
 const MenuItems = () => {
   const renderItem = ({ item }) => <Item name={item.name} price={item.price} />;
-  const renderSectionHeader = ({ section: { title } }) => <Text>{title}</Text>;
+  const renderSectionHeader = ({ section: { title } }) => (
+    <View style={style.headerStyle}>
+      <Text style={style.sectionHeader}>{title}</Text>
+    </View>
+  );
 
   return (
     <View style={style.container}>
@@ -76,6 +80,15 @@ const style = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  headerStyle: {
+    backgroundColor: "#F4CE14",
+  },
+  sectionHeader: {
+    color: "#333333",
+    fontSize: 26,
+    flexWrap: "wrap",
+    textAlign: "center",
   },
   itemText: {
     color: "#F4CE14",
