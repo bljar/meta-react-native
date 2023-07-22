@@ -46,6 +46,7 @@ const menuItemsToDisplay = [
 
 const MenuItems = () => {
   const renderItem = ({ item }) => <Item name={item.name} price={item.price} />;
+  const renderSectionHeader = ({ section: { title } }) => <Text>{title}</Text>;
 
   return (
     <View style={style.container}>
@@ -53,6 +54,7 @@ const MenuItems = () => {
         keyExtractor={(item, index) => item.name + index}
         sections={menuItemsToDisplay}
         renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
       ></SectionList>
     </View>
   );
