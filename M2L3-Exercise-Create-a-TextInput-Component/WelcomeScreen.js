@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { ScrollView, Text, StyleSheet, TextInput } from "react-native";
 
 export default function WelcomeScreen() {
@@ -13,9 +13,10 @@ export default function WelcomeScreen() {
         to hear more about your experience with us!
       </Text>
       <TextInput
-        style={todo}
+        style={styles.inputBox}
         value={firstName}
         onChangeText={onChangeFirstName}
+        placeholder={"First Name"}
       />
     </ScrollView>
   );
@@ -37,5 +38,14 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     color: "#EDEFEE",
     textAlign: "center",
+  },
+  inputBox: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    fontSize: 16,
+    borderColor: "#EDEFEE",
+    backgroundColor: "#EDEFEE",
   },
 });
