@@ -2,6 +2,8 @@ import * as React from "react";
 import { ScrollView, Text, StyleSheet, TextInput } from "react-native";
 
 export default function WelcomeScreen() {
+  const [firstName, onChangeFirstName] = useState("");
+
   return (
     <ScrollView indicatorStyle="white" style={styles.container}>
       <Text style={styles.headerText}>Welcome to Little Lemon</Text>
@@ -10,7 +12,11 @@ export default function WelcomeScreen() {
         and classic cocktails in a lively but casual environment. We would love
         to hear more about your experience with us!
       </Text>
-      <TextInput style={todo} value={todo} onChangeText={todo} />
+      <TextInput
+        style={todo}
+        value={firstName}
+        onChangeText={onChangeFirstName}
+      />
     </ScrollView>
   );
 }
