@@ -1,12 +1,26 @@
+import { useState } from "react";
 import { ScrollView, Text, StyleSheet, TextInput } from "react-native";
 
 export default function LoginScreen() {
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.headerText}>Welcome to Little Lemon</Text>
       <Text style={styles.regularText}>Login to continue </Text>
-      <TextInput placeholder="email" />
-      <TextInput secureTextEntry={true} placeholder="password" />
+      <TextInput
+        value={email}
+        onChangeText={onChangeEmail}
+        placeholder="email"
+        keyboardType="email-address"
+      />
+      <TextInput
+        value={password}
+        onChangeText={onChangePassword}
+        secureTextEntry={true}
+        placeholder="password"
+      />
     </ScrollView>
   );
 }
