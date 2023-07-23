@@ -4,6 +4,12 @@ import { ScrollView, Text, StyleSheet } from 'react-native';
 export default function WelcomeScreen() {
   return (
     <ScrollView indicatorStyle="white" style={styles.container}>
+    <Image
+    source={require('./img/logo.png')}
+    resizeMode="cover"
+    accessible={true}
+    accessibilityLabel={'Little Lemon Logo'}
+  />
       <Text style={styles.headerText}>Welcome to Little Lemon</Text>
       <Text style={styles.regularText}>
         Little Lemon is a charming neighborhood bistro that serves simple food
