@@ -16,7 +16,10 @@ export default function App() {
       <View style={styles.container}>
         <LittleLemonHeader />
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login"></Stack.Navigator>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+          </Stack.Navigator>
         </NavigationContainer>
       </View>
       <View style={styles.footerContainer}>
