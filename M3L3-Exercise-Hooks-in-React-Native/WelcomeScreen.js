@@ -11,7 +11,14 @@ export default function WelcomeScreen() {
   const colorScheme = useColorScheme();
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[
+        styles.container,
+        colorScheme === "light"
+          ? { backgroundColor: "white", color: "black" }
+          : { backgroundColor: "black", color: "white" },
+      ]}
+    >
       <View style={styles.headerWrapper}>
         <Image
           style={styles.image}
@@ -21,9 +28,21 @@ export default function WelcomeScreen() {
           accessibilityLabel={"Little Lemon Logo"}
         />
 
-        <Text style={styles.headerText}>Little Lemon</Text>
+        <Text
+          style={[
+            styles.headerText,
+            colorScheme === "light" ? { color: "black" } : { color: "white" },
+          ]}
+        >
+          Little Lemon
+        </Text>
       </View>
-      <Text style={styles.regularText}>
+      <Text
+        style={[
+          styles.regularText,
+          colorScheme === "light" ? { color: "black" } : { color: "white" },
+        ]}
+      >
         Little Lemon is a charming neighborhood bistro that serves simple food
         and classic cocktails in a lively but casual environment. We would love
         to hear your experience with us!
