@@ -16,10 +16,10 @@ export default function App() {
       <NavigationContainer>
         <View style={styles.container}>
           <LittleLemonHeader />
-          <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Welcome" component={WelcomeScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
-          </Stack.Navigator>
+          <Drawer.Navigator useLegacyImplementation>
+            <Drawer.Screen name="Welcome" component={WelcomeScreen} />
+            <Drawer.Screen name="Login" component={LoginScreen} />
+          </Drawer.Navigator>
         </View>
         <View style={styles.footerContainer}>
           <LittleLemonFooter />
