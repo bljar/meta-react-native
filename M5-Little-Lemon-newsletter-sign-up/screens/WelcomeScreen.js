@@ -9,14 +9,14 @@ const WelcomeScreen = ({ navigation }) => {
         style={styles.image}
         source={require("../assets/little-lemon-logo.png")}
       />
-      <Text style={styles.image}>
+      <Text style={styles.text}>
         Little Lemon, your local Medirerranean Bistro
       </Text>
       <Pressable
         style={styles.button}
         onPress={() => navigation.navigate("Subscribe")}
       >
-        <Text>Newsletter</Text>
+        <Text style={styles.buttonText}>Newsletter</Text>
       </Pressable>
     </View>
   );
@@ -25,28 +25,42 @@ const WelcomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  text: {
-    fontSize: 30,
-    padding: 20,
-    margin: 10,
-    textAlign: "center",
+    justifyContent: "flex-end",
   },
   image: {
     margin: 20,
-    marginTop: 30,
     width: 200,
     height: 200,
     resizeMode: "contain",
     alignSelf: "center",
   },
-  button: {
-    fontSize: 22,
-    alignItems: "center",
-    marginHorizontal: 20,
+  text: {
+    fontSize: 18,
+    margin: 20,
+    marginBottom: 100,
     padding: 10,
+    textAlign: "center",
+  },
+  inputBox: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    fontSize: 16,
+  },
+  button: {
+    height: 40,
+    margin: 12,
     borderRadius: 10,
-    backgroundColor: "#F4CE14",
+    padding: 10,
+    backgroundColor: "#495E57",
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "white",
+    textAlign: "center",
   },
 });
 
