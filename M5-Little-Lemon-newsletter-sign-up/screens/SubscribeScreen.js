@@ -8,10 +8,13 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { validateEmail } from "../utils";
 
 const SubscribeScreen = () => {
   // Add subscribe screen code here
   const [email, onChangeEmail] = useState("");
+  const isValidEmail = validateEmail(email);
+
   return (
     <View>
       <Image
@@ -28,7 +31,13 @@ const SubscribeScreen = () => {
         onChangeText={onChangeEmail}
       />
       <Pressable
-        style={styles.button}
+        disabled={!isValidEmail}
+        style={() => [
+          {
+            backgroundColor: isValidEmail ? "#495E57" : "grey",
+          },
+          styles.button,
+        ]}
         onPress={() => Alert.alert("Thanks for subscribing, stay tuned!")}
       >
         <Text style={styles.buttonText}>Subscribe</Text>
@@ -68,7 +77,6 @@ const styles = StyleSheet.create({
     margin: 12,
     borderRadius: 10,
     padding: 10,
-    backgroundColor: "#495E57",
   },
   buttonText: {
     fontSize: 16,
