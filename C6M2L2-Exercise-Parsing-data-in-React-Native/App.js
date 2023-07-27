@@ -1,4 +1,5 @@
-import { FlatList, Text, SafeAreaView, View, StyleSheet } from 'react-native';
+import { FlatList, Text, SafeAreaView, View, StyleSheet } from "react-native";
+import menuItems from "./menuItems.json";
 
 export default App = () => {
   return (
@@ -13,8 +14,8 @@ const menuStyles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-    color: '#F4CE14',
+    color: "#F4CE14",
     fontSize: 30,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
