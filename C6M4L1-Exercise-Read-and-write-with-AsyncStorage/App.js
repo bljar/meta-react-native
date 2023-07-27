@@ -13,17 +13,33 @@ export default function App() {
     latestNews: false,
   });
 
-  useUpdate(() => {
-    const value = Object.entries(preferences).map((entry) => {
-      return [entry[0], String(entry[1])];
-    })(async () => {
+  React.useEffect(() => {
+    (async () => {
       try {
-        await AsyncStorage.multiSet(value);
+        const values = await AsyncStorage.multiGet(Object.keys(preferences));
+        const initialState = values.reduce((acc, curr) => {
+          acc[curr[0]] = JSON.parse(curr[1]);
+          return acc;
+        }, {});
+        setPreferences(initialState);
       } catch (e) {
-        Alert.alert("An error occurred: ${e.message}");
+        Alert.alert(`An error occurred: ${e.message}`);
       }
-    });
-  });
+    })();
+  }, []);
+
+  useUpdate(() => {
+    (async () => {
+      const values = Object.entries(preferences).map((entry) => {
+        return [entry[0], String(entry[1])];
+      });
+      try {
+        await AsyncStorage.multiSet(values);
+      } catch (e) {
+        Alert.alert(`An error occurred: ${e.message}`);
+      }
+    })();
+  }, [preferences]);
 
   const updateState = (key) => () =>
     setPreferences((prevState) => ({
