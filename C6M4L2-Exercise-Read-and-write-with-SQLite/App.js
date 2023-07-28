@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,21 +6,21 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
-} from 'react-native';
-import * as SQLite from 'expo-sqlite';
+} from "react-native";
+import * as SQLite from "expo-sqlite";
 import {
   IconButton,
   Provider,
   Portal,
   Dialog,
   Button,
-} from 'react-native-paper';
-import asyncAlert from './asyncAlert';
+} from "react-native-paper";
+import asyncAlert from "./asyncAlert";
 
-const db = SQLite.openDatabase('little_lemon');
+const db = SQLite.openDatabase("little_lemon");
 
 export default function App() {
-  const [textInputValue, setTextInputValue] = useState('');
+  const [textInputValue, setTextInputValue] = useState("");
   const [dialog, setDialog] = useState({
     customer: {},
     isVisible: false,
@@ -30,9 +30,9 @@ export default function App() {
   useEffect(() => {
     db.transaction((tx) => {
       tx.executeSql(
-        'create table if not exists customers (id integer primary key not null, uid text, name text);'
+        "create table if not exists customers (id integer primary key not null, uid text, name text);"
       );
-      tx.executeSql('select * from customers', [], (_, { rows }) => {
+      tx.executeSql("select * from customers", [], (_, { rows }) => {
         const customers = rows._array.map((item) => ({
           uid: item.uid,
           name: item.name,
@@ -53,20 +53,35 @@ export default function App() {
       isVisible: false,
       customer: {},
     });
+
     // 1. Set the new local customer state
-    // 2. Create a SQL transaction to edit a customer. Make sure if two names are the same, only the selected item is deleted
+    const newCustomers = customers.map((customer) => {
+      if (customer.uid !== updatedCustomer.uid) return customer;
+      return updatedCustomer;
+    });
+    setCustomers(newCustomers);
+
+    // 2. Create a SQL transaction to edit a customer.
+    //    Make sure if two names are the same, only the selected item is deleted
+    db.transaction((tx) => {
+      tx.executeSql(
+        `update customers set uid=?, name=? where uid=${updatedCustomer.uid}`,
+        [updatedCustomer.uid, updatedCustomer.name]
+      );
+    });
   };
 
   const deleteCustomer = async (customer) => {
     const shouldDelete = await asyncAlert({
-      title: 'Delete customer',
+      title: "Delete customer",
       message: `Are you sure you want to delete the customer named "${customer.name}"?`,
     });
     if (!shouldDelete) {
       return;
     }
     // 1. Set the new local customer state
-    // 2. Create a SQL transaction to delete a customer. Make sure if two names are the same, only the selected item is deleted
+    // 2. Create a SQL transaction to delete a customer.
+    //    Make sure if two names are the same, only the selected item is deleted
   };
 
   return (
@@ -91,13 +106,14 @@ export default function App() {
               setCustomers([...customers, newValue]);
               db.transaction((tx) => {
                 tx.executeSql(
-                  'insert into customers (uid, name) values(?, ?)',
+                  "insert into customers (uid, name) values(?, ?)",
                   [newValue.uid, newValue.name]
                 );
               });
-              setTextInputValue('');
+              setTextInputValue("");
             }}
-            style={styles.buttonStyle}>
+            style={styles.buttonStyle}
+          >
             <Text style={styles.buttonTextStyle}> Save Customer </Text>
           </TouchableOpacity>
           <View>
@@ -154,26 +170,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   titleText: {
     fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     paddingVertical: 20,
   },
   customer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   customerName: {
     fontSize: 18,
   },
   buttonStyle: {
     fontSize: 16,
-    color: 'white',
-    backgroundColor: 'green',
+    color: "white",
+    backgroundColor: "green",
     padding: 5,
     marginTop: 32,
     minWidth: 250,
@@ -182,18 +198,18 @@ const styles = StyleSheet.create({
   buttonTextStyle: {
     padding: 5,
     fontSize: 18,
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
   },
   textInputStyle: {
-    textAlign: 'center',
+    textAlign: "center",
     height: 40,
     fontSize: 18,
-    width: '100%',
+    width: "100%",
     borderWidth: 1,
-    borderColor: 'green',
+    borderColor: "green",
   },
   icons: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
