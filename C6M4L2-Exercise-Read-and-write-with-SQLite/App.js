@@ -81,15 +81,14 @@ export default function App() {
     }
 
     // 1. Set the new local customer state
-    const newCustomers = customers.map((customer) => {
-      if (customer.uid !== customer.uid) return customer;
-    });
+    const newCustomers = customers.filter((c) => c.uid !== customer.uid);
+
     setCustomers(newCustomers);
 
     // 2. Create a SQL transaction to delete a customer.
     //    Make sure if two names are the same, only the selected item is deleted
     db.transaction((tx) => {
-      tx.executeSql("delete from customers where uid=?", [updatedCustomer.uid]);
+      tx.executeSql("delete from customers where uid=?", [customer.uid]);
     });
   };
 
