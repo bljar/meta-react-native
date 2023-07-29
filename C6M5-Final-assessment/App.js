@@ -47,7 +47,7 @@ export default function App() {
     try {
       const response = await fetch(API_URL);
       const json = await response.json();
-      const newMenu = json.menu.map();
+      const newMenu = json.menu;
       return newMenu;
     } catch (error) {
       console.error(error);
